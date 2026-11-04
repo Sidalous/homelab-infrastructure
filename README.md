@@ -33,8 +33,8 @@ All services run as Docker/Podman containers with compose files and ADRs availab
 | Service | Purpose | Status |
 |---|---|---|
 | Gitea | Private repo, to be mirrored to Github | Under Construction |
-| Nginx Proxy Manager | Reverse proxy, SSL | Planned |
-| Vaultwarden | Self-hosted password manager | Planned |
+| Active Directory | Bare-metal Windows Server AD DC | Planned (post RHCSA)|
+| DNS Sinkhole | PiHole DNS Sinkhole for Samsung TV | Deployed & running |
 | Headscale | Self-hosted Tailscale control server | Planned |
 | Fail2ban | Intrusion prevention / log monitoring | Planned |
 
@@ -58,22 +58,22 @@ This homelab is evolving alongside a structured Infrastructure Engineering learn
 
 ├── README.md
 ├── ansible
-│   ├── playbooks/
-│   └── roles
+│   ├── playbooks/
+│   └── roles
 ├── ci-cd/
 ├── containers/
 ├── docs/
-│   ├── adr/
-│   ├── architecture/
-│   ├── certifications/
-│   │   └── linux+
-│   ├── incidents/
-│   ├── runbooks/
-│   └── security/
+│   ├── adr/
+│   ├── architecture/
+│   ├── certifications/
+│   │   └── linux+
+│   ├── incidents/
+│   ├── runbooks/
+│   └── security/
 ├── monitoring/
 ├── scripts/
-│   ├── bash
-│   └── python
+│   ├── bash
+│   └── python
 └── terraform
 
 ## Incident reports
@@ -109,7 +109,7 @@ This homelab serves as the hands-on practice environment for a DevSecOps certifi
 
 1. No copy & paste of code — everything is manually typed
 2. Document everything 
-3. 
+3. break thing and notice what went wrong 
 4. Keep notes of blindspots and weaknesses
 5. Have fun!
 
