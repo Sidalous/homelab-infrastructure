@@ -55,7 +55,8 @@ This homelab is evolving alongside a structured Infrastructure Engineering learn
 
 
 # Repo structure
-
+```text
+.
 ├── README.md
 ├── ansible
 │   ├── playbooks/
@@ -75,7 +76,7 @@ This homelab is evolving alongside a structured Infrastructure Engineering learn
 │   ├── bash
 │   └── python
 └── terraform
-
+```
 ## Incident reports
 
 Part of building this lab is breaking things and documenting how they were fixed. These are written as genuine post-incident reports.
