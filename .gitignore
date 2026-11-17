@@ -1,0 +1,25 @@
+# python
+.venv/
+__pycache__/
+*.pyc
+
+# secrets / env
+.env 
+*.env
+
+# ansible 
+inventory*.ini
+inventory.ini
+*.retry
+
+# ssh private keys 
+id_ed25519
+id_rsa
+
+# editor 
+.DS_store
+
+# kate / swp files
+*.swp
+*.kate-swp
+*~
