@@ -1,0 +1,58 @@
+---
+- name: configure rhel vm to baseline
+  hosts: rhel_vm
+  become: true
+
+  tasks:
+    - name: copy ML-DSA-87 key to host
+      ansible.builtin.copy:
+        src: "files/RPM-GPG-KEY-PQC-redhat-release"
+        dest: /etc/pki/rpm-gpg/RPM-GPG-KEY-PQC-redhat-release
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: import red hat pqc signing key
+      ansible.builtin.rpm_key:
+        key: /etc/pki/rpm-gpg/RPM-GPG-KEY-PQC-redhat-release
+        state: present
+
+    - name: upgrade installed packages
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+
+    - name: install podman
+      ansible.builtin.dnf:
+         name: "podman"
+         state: latest
+
+    - name: ensure vim installed
+      ansible.builtin.dnf:
+        name: "vim"
+        state: latest
+
+#    - name: install htop
+#      ansible.builtin.dnf:
+#        name: "htop"
+#        state: latest
+
+    - name: set hostname
+      ansible.builtin.hostname:
+        name: vm102
+
+    - name: install chrony 
+      ansible.builtin.dnf:
+        name: "chrony"
+        state: latest
+
+    - name: set system tz
+      community.general.timezone:
+        name: Europe/London
+
+    - name: start chrony
+      ansible.builtin.systemd_service:
+        name: chronyd
+        state: started
+        enabled: true
+        masked: no

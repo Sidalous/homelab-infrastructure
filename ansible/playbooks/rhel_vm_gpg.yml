@@ -1,0 +1,28 @@
+---
+- name: configure rhel vm
+  hosts: rhel_vm_gpg
+  become: true
+
+  tasks:
+    - name: copy ML-DSA-87 key to host
+      ansible.builtin.copy:
+        src: "files/RPM-GPG-KEY-PQC-redhat-release"
+        dest: /etc/pki/rpm-gpg/RPM-GPG-KEY-PQC-redhat-release
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: import red hat pqc signing key
+      ansible.builtin.rpm_key:
+        key: /etc/pki/rpm-gpg/RPM-GPG-KEY-PQC-redhat-release
+        state: present
+
+    - name: upgrade installed packages
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+
+    - name: ensure vim installed
+      ansible.builtin.dnf:
+        name: "vim"
+        state: latest
