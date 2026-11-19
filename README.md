@@ -19,21 +19,18 @@ This is my personal infrastructure lab running on a Lenovo ThinkCentre M720q, bu
 | VM101 | Ubuntu 24 LTS|
 | VM102 | *Planned* RHEL 10 Replacement for VM101 |
 | VM103 | RHEL 10 Node1 for RHCSA labs |
-| VM104 | |
 | VM105 | RHEL 10 Node2 for RHCSA labs |
 | VM106 | RHEL 10 to be used as the Prometheus & Grafana node |
 | VM107 | Oracle Linux 10.2 VM to utilise Oracles Linux distro & database tooling |
 
-##### VM101 
-
 # What's running
 
-All services run as Docker/Podman containers with compose files and ADRs available
+All services to be accompanied by an ADR, runbook and any incident reports.
 
 | Service | Purpose | Status |
 |---|---|---|
+| Active Directory | Bare-metal Windows Server AD DC | Under Construction |
 | Gitea | Private repo, to be mirrored to Github | Under Construction |
-| Active Directory | Bare-metal Windows Server AD DC | Planned (post RHCSA)|
 | DNS Sinkhole | PiHole DNS Sinkhole for Samsung TV | Deployed & running |
 | Headscale | Self-hosted Tailscale control server | Planned |
 | Fail2ban | Intrusion prevention / log monitoring | Planned |
@@ -45,13 +42,12 @@ This homelab is evolving alongside a structured Infrastructure Engineering learn
 
 | Addition | Purpose | Skills demonstrated |
 |---|---|---|
-| Ansible playbooks | Automate VM provisioning and configuration | Configuration management, idempotency |
 | Windows Server (bare metal) | Domain Controller & Active Directory | IAM management and Win/Linux integration. Bare metal to add networking reps | 
 | Gitea & GitHub Actions CI/CD | Automated linting, testing, Docker image builds | CI/CD pipelines, automated workflows. Gitea private repo with CI pushing to GitHub Actions |
 | Prometheus + Grafana | Monitoring, alerting, dashboards | Observability, metrics, alerting rules |
 | OpenSCAP / CIS | Security scanning and base lining | Security hardening and auditing |
 | Podman | Migrate services from Docker to Podman | Migration and maintenance of rootless containers |
-| Terraform configs | Provision AWS lab resources as code | Infrastructure as Code, state management |
+| Terraform configs | Provision AWS/Azure lab resources as code | Infrastructure as Code, state management |
 
 
 # Repo structure
@@ -60,30 +56,16 @@ This homelab is evolving alongside a structured Infrastructure Engineering learn
 ├── README.md
 ├── ansible
 │   ├── playbooks/
-│   └── roles
-├── ci-cd/
-├── containers/
 ├── docs/
 │   ├── adr/
-│   ├── architecture/
 │   ├── certifications/
-│   │   └── linux+
-│   ├── incidents/
-│   ├── runbooks/
-│   └── security/
-├── monitoring/
+│   │   ├── linux+
+│   │   └── RHCSA/
+│   └── openshift/
 ├── scripts/
-│   ├── bash
-│   └── python
-└── terraform
+│   └── bash
+
 ```
-## Incident reports
-
-Part of building this lab is breaking things and documenting how they were fixed. These are written as genuine post-incident reports.
-
-| Date | Incident | Root cause | Report |
-|---|---|---|---|
-
 
 ## Scripts
 
@@ -98,13 +80,20 @@ Python and Bash automation scripts built as part of a structured learning progra
 
 ## Ansible & IaC
 
-## Certifications in progress
+| Category | Name | What it does |
+|---|---|---|
+| playbook | rhel_vm_gpg.yml | Saves ML-DSA-87 GPG key to node, upgrades all packages and ensures vim is installed |
+| playbook | rhel_vm_baseline.yml | sets a basic baseline, with gpg key, vim, podman, chrony etc | 
 
-This homelab serves as the hands-on practice environment for a DevSecOps certification programme:
+*Note: playbooks to be refactored into roles and playbooks*
+
+## Certifications
+
+This homelab serves as the hands-on practice environment for the following certifications:
 
 - **CompTIA Linux+ (XK0-006)** — passed 24th July 2026
-- **Red Hat RHCSA** - exam booked for 16th November
-- **AWS SAA or Azure AZ-104** — after RHCSA - likely Jan/Feb 2027 but may be brought forward. Cert decision to be made after RHCSA and Gitea & Windows AD DC is functional.
+- **Red Hat RHCSA** - passed 16th November 2026
+- **AWS SAA or Azure AZ-104** — likely Jan/Feb 2027 but may be brought forward. Cert decision to be made after RHCSA and Gitea & Windows AD DC is functional.
 
 ## Rules
 
